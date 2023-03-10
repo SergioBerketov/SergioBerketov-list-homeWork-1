@@ -32,38 +32,42 @@ public class Main {
             int actionChoice = Integer.parseInt(input) - 1;
 
             if (actionChoice == 0) {
-                System.out.println("Какую покупку Вы хотите добавить?");
-                Scanner s = new Scanner(System.in);
-                String newProduct = scanner.nextLine();
-//                if(!newProduct.equals(products)) {
-//                    throw new Exception("Выберите продукт из списка!");  ХОТЕЛ ОБРАБОТАТЬ,НО НЕ СМОГ РАЗОБРАТЬСЯ КАК СРАВНИТЬ СО ВСЕМ ЛИСТОМ products
-//                }
-                productsList.add(newProduct);
-                System.out.println("И того в списке покупок " + productsList);
-
+                addProduct(productsList, scanner);
             }
             if (actionChoice == 1) {
                 showProductList(productsList);
             }
 
             if (actionChoice == 2) {
-                showProductList(productsList);
-                System.out.println("Какую позицию хотите удалить? Введите номер или название");
-                Scanner scanner2 = new Scanner(System.in);
-                String choice = scanner2.next();
-                try {
-                    int index = Integer.parseInt(choice) - 1;
-                    productsList.remove(index);
-                } catch (Exception e) {
-                    productsList.remove(choice);
-                }
+                deleteProduct(productsList);
             }
         }
     }
+
+    private static void deleteProduct(List<String> productsList) {
+        showProductList(productsList);
+        System.out.println("Какую позицию хотите удалить? Введите номер или название");
+        Scanner scanner2 = new Scanner(System.in);
+        String choice = scanner2.next();
+        try {
+            int index = Integer.parseInt(choice) - 1;
+            productsList.remove(index);
+        } catch (Exception e) {
+            productsList.remove(choice);
+        }
+    }
+
+    private static void addProduct(List<String> productsList, Scanner scanner) {
+        System.out.println("Какую покупку Вы хотите добавить?");
+        Scanner s = new Scanner(System.in);
+        String newProduct = scanner.nextLine();
+        productsList.add(newProduct);
+        System.out.println("И того в списке покупок " + productsList);
+    }
+
     private static void showProductList(List<String> productsList) {
         for (int i = 0; i < productsList.size(); i++) {
             System.out.println((i + 1) + ". " + productsList.get(i));
-            ;
         }
     }
 }
